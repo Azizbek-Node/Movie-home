@@ -1,10 +1,10 @@
 import React from 'react'
 import logo from '@/assets/logo (6).svg'
-import { BiBookmarks } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { IoTabletPortraitSharp } from "react-icons/io5";
 import { RiTv2Fill } from "react-icons/ri";
 import { RiCoupon3Line } from "react-icons/ri";
+import { Link } from 'react-router-dom';
 
 const lang = [
   {
@@ -25,7 +25,9 @@ const Header = () => {
   return (
     <div className='container flex flex-wrap items-center justify-between py-4'>
         <div className='w-[112px] h-[36px]'>
+            <Link to={"/"}>
             <img className='w-full h-full' src={logo} alt="" />
+            </Link>
         </div>
         <ul className='flex w-[280px] flex-wrap justify-between'>
             <li className='flex flex-wrap flex-col items-center cursor-pointer'>
