@@ -1,62 +1,89 @@
-import React from 'react'
-import logo from '@/assets/logo (6).svg'
+import React from "react";
+import logo from "@/assets/logo (6).svg";
 import { FiSearch } from "react-icons/fi";
 import { IoTabletPortraitSharp } from "react-icons/io5";
-import { RiTv2Fill } from "react-icons/ri";
-import { RiCoupon3Line } from "react-icons/ri";
-import { Link } from 'react-router-dom';
+import { RiTv2Fill, RiCoupon3Line } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import logoRu from "@/assets/RU.svg"
 
 const lang = [
   {
-      label: 'Ру',
-      value: 'ru',
+    label: "Ру",
+    code: "ru",
   },
-    {
-        label: 'Eng',
-        value: 'en',
-    },
-    {
-        label: 'Uz',
-        value: 'uz',
-    }
-]
+  {
+    label: "Eng",
+    code: "en",
+  },
+  {
+    label: "Uz",
+    code: "uz",
+  },
+];
 
-const Header = () => {
+const Header = ({ fn, val }) => {
+  const { i18n } = useTranslation();
+
+  const changeLang = (e) => {
+    const lang_code = e.target.value;
+    i18n.changeLanguage(lang_code);
+  };
+
   return (
-    <div className='container flex flex-wrap items-center justify-between py-4'>
-        <div className='w-[112px] h-[36px]'>
-            <Link to={"/"}>
-            <img className='w-full h-full' src={logo} alt="" />
-            </Link>
-        </div>
-        <ul className='flex w-[280px] flex-wrap justify-between'>
-            <li className='flex flex-wrap flex-col items-center cursor-pointer'>
-                <RiTv2Fill className='text-[20px]'/>
-                <span>Афиша</span>
-            </li>
-            <li className='flex flex-wrap flex-col items-center cursor-pointer'>
-                <IoTabletPortraitSharp className='text-[20px]'/>
-                <span>Сеанс</span>
-            </li>
-            <li className='flex flex-wrap flex-col items-center cursor-pointer'>
-                <RiCoupon3Line className='text-[20px]'/>
-                <span>Билет</span>
-            </li>
-            <li className='flex flex-wrap flex-col items-center cursor-pointer'>
-                <FiSearch className='text-[20px]'/>
-                <span>Поиск</span>
-            </li>
-        </ul>
-        <div className='flex gap-2 items-center'>
-            <select className='h-full bg-slate-900 px-2 py-2 rounded-md text-white'>
-                {lang.map((item) => (
-                    <option key={item.value} value={item.value}>{item.label}</option>
-                ))}
-            </select>
-            <button className='w-[130px] bg-red-700 text-white py-3 rounded-xl'>Войти</button>
-        </div>
+    <div
+      className={`container flex flex-wrap items-center justify-between py-4 ${
+        val ? "bg-white text-black" : "bg-black text-white"
+      }`}
+    >
+      <div className="w-[112px] h-[36px]">
+        <Link to={"/"}>
+          <img className="w-full h-full" src={logo} alt="Logo" />
+        </Link>
+      </div>
+      <ul className="flex w-[280px] flex-wrap justify-between">
+        <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <RiTv2Fill className="text-[20px]" />
+          <span>Афиша</span>
+        </li>
+        <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <IoTabletPortraitSharp className="text-[20px]" />
+          <span>Сеанс</span>
+        </li>
+        <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <RiCoupon3Line className="text-[20px]" />
+          <span>Билет</span>
+        </li>
+        <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <FiSearch className="text-[20px]" />
+          <span>Поиск</span>
+        </li>
+      </ul>
+      <div className="flex gap-2 items-center">
+        <select
+          className={`h-full px-2 py-2 rounded-md ${
+            val ? "bg-black text-white" : "bg-[#0E0E0E] text-white"
+          }`}
+          value={i18n.language}
+          onChange={changeLang}
+        >
+          {lang.map((item) => (
+            <option key={item.code} value={item.code}>
+              {item.label}
+            </option>
+          ))}
+        </select>
+        <button
+          onClick={fn}
+          className={`w-[130px] py-3 rounded-xl ${
+            val ? "bg-white text-black" : "bg-black text-white"
+          }`}
+        >
+          {val ? "Dark Mode" : "Light Mode"}
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

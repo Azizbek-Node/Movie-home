@@ -1,6 +1,5 @@
 import "./App.css";
-import Movies from "./components/movies/Movies";
-import Router from "./router";
+import Router from "./routes";
 
 function App() {
   return (
