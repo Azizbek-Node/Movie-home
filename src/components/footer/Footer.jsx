@@ -6,8 +6,25 @@ import { IoBasketballOutline } from "react-icons/io5";
 import appstore from "@/assets/appstore.png";
 import googleplay from "@/assets/googleplay.png";
 import footerlogo from "@/assets/footer-logo.svg";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const handleGooglePlayClick = () => {
+    window.location.href = 'https://play.google.com/store'
+  }
+  const navigate = useNavigate()
+  const handleAppStoreClick = () => {
+    window.location.href = 'https://www.apple.com/app-store/'
+  }
+  const handleYoutubeClick = () => {
+    window.location.href = 'https://youtube.com/@azizbekdota1?si=U23T0G69zMcxGIuk'
+  }
+  const handleInstagramClick = () => {
+    window.location.href = 'https://www.instagram.com/azizbek_turaxonov/'
+  }
+  const handleFacebookClick = () => {
+    window.location.href = 'https://www.facebook.com/'
+  }
   return (
     <footer className="container bg-[#111111] text-white py-3 mt-10 rounded-md">
       <div className="container mx-auto flex flex-wrap justify-between gap-8 px-4">
@@ -16,10 +33,10 @@ const Footer = () => {
             <img src={footerlogo} alt="footerlogo" className="w-20 h-20" />
           </div>
           <div className="space-y-3">
-            <button className="block w-full md:w-auto py-2 px-4 rounded">
+            <button onClick={handleGooglePlayClick} className="block w-full md:w-auto py-2 px-4 rounded">
               <img src={googleplay} alt="googleplay" className="w-full h-full" />
             </button>
-            <button className="block w-full md:w-auto py-2 px-4 rounded">
+            <button onClick={handleAppStoreClick} className="block w-full md:w-auto py-2 px-4 rounded">
               <img src={appstore} alt="appstore" className="w-full h-full" />
             </button>
           </div>
@@ -52,9 +69,9 @@ const Footer = () => {
           </p>
           <h3 className="text-lg font-semibold mb-3">Социальные сети</h3>
           <div className="flex space-x-4 text-2xl">
-            <FaInstagram className="cursor-pointer" />
-            <FaFacebook className="cursor-pointer" />
-            <FaYoutube className="cursor-pointer" />
+            <FaInstagram onClick={handleInstagramClick} className="cursor-pointer" />
+            <FaFacebook onClick={handleFacebookClick} className="cursor-pointer" />
+            <FaYoutube onClick={handleYoutubeClick} className="cursor-pointer" />
           </div>
         </div>
       </div>

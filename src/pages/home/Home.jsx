@@ -6,12 +6,23 @@ import React, { memo, useEffect, useState } from "react";
 import Footer from "@/components/footer/Footer";
 
 const Home = () => {
-  const [isDark, setIsDark] = useState(true)
-  
+  const [isDark, setIsDark] = useState(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
+
   const darkModeHandler = () => {
-    setIsDark(!isDark);
-    document.body.classList.toggle("dark");
+    setIsDark((prev) => {
+      const newMode = !prev;
+      localStorage.setItem("darkMode", JSON.stringify(newMode));
+      document.body.classList.toggle("dark", newMode);
+      return newMode;
+    });
   };
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", isDark);
+  }, [isDark]);
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -19,12 +30,13 @@ const Home = () => {
       setData(res.data);
     });
   }, []);
+
   return (
-    <main className="bg-white dark:bg-black">
+    <main className={`${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
       <Header fn={darkModeHandler} val={isDark} />
-      <Carousel data={data}/>
+      <Carousel data={data} />
       <Movies data={data} />
-      <Footer/>
+      <Footer />
     </main>
   );
 };

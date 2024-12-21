@@ -5,7 +5,7 @@ import { IoTabletPortraitSharp } from "react-icons/io5";
 import { RiTv2Fill, RiCoupon3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logoRu from "@/assets/RU.svg"
+import logoRu from "@/assets/RU.svg";
 
 const lang = [
   {
@@ -22,8 +22,17 @@ const lang = [
   },
 ];
 
-const Header = ({ fn, val }) => {
+const Header = ({ fn, val, id }) => {
   const { i18n } = useTranslation();
+
+  const darkModeHandler = () => {
+    setIsDark((prev) => {
+      const newMode = !prev;
+      localStorage.setItem("darkMode", JSON.stringify(newMode));
+      document.body.classList.toggle("dark", newMode);
+      return newMode;
+    });
+  };
 
   const changeLang = (e) => {
     const lang_code = e.target.value;
@@ -31,9 +40,10 @@ const Header = ({ fn, val }) => {
   };
 
   return (
-    <div
+    <header
+      id="header"
       className={`container flex flex-wrap items-center justify-between py-4 ${
-        val ? "bg-white text-black" : "bg-black text-white"
+        val ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
       <div className="w-[112px] h-[36px]">
@@ -43,12 +53,16 @@ const Header = ({ fn, val }) => {
       </div>
       <ul className="flex w-[280px] flex-wrap justify-between">
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
-          <RiTv2Fill className="text-[20px]" />
-          <span>Афиша</span>
+          <Link to={"/"}>
+            <RiTv2Fill className="text-[20px]" />
+            <span>Афиша</span>
+          </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
-          <IoTabletPortraitSharp className="text-[20px]" />
-          <span>Сеанс</span>
+          <Link to={`/movie/${1}`}>
+            <IoTabletPortraitSharp className="text-[20px]" />
+            <span>Сеанс</span>
+          </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
           <RiCoupon3Line className="text-[20px]" />
@@ -62,7 +76,7 @@ const Header = ({ fn, val }) => {
       <div className="flex gap-2 items-center">
         <select
           className={`h-full px-2 py-2 rounded-md ${
-            val ? "bg-black text-white" : "bg-[#0E0E0E] text-white"
+            val ? "bg-[#0E0E0E] text-white" : " bg-slate-200 text-black"
           }`}
           value={i18n.language}
           onChange={changeLang}
@@ -82,7 +96,7 @@ const Header = ({ fn, val }) => {
           {val ? "Dark Mode" : "Light Mode"}
         </button>
       </div>
-    </div>
+    </header>
   );
 };
 

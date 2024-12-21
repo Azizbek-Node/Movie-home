@@ -3,6 +3,9 @@ import MovieItem from "./MovieItem";
 import { memo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "./swiper.css";
 
 const Movies = ({ data }) => {
   console.log(data);
