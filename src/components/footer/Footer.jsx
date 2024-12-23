@@ -6,7 +6,7 @@ import { IoBasketballOutline } from "react-icons/io5";
 import appstore from "@/assets/appstore.png";
 import googleplay from "@/assets/googleplay.png";
 import footerlogo from "@/assets/footer-logo.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const handleGooglePlayClick = () => {
@@ -30,7 +30,9 @@ const Footer = () => {
       <div className="container mx-auto flex flex-wrap justify-between gap-8 px-4">
         <div className="flex-1">
           <div className="text-2xl font-bold text-red-600 mb-4">
-            <img src={footerlogo} alt="footerlogo" className="w-20 h-20" />
+            <Link to="/">
+             <img src={footerlogo} alt="footerlogo" className="w-20 h-20" />
+            </Link>
           </div>
           <div className="space-y-3">
             <button onClick={handleGooglePlayClick} className="block w-full md:w-auto py-2 px-4 rounded">

@@ -5,7 +5,6 @@ import { IoTabletPortraitSharp } from "react-icons/io5";
 import { RiTv2Fill, RiCoupon3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logoRu from "@/assets/RU.svg";
 
 const lang = [
   {
@@ -25,14 +24,6 @@ const lang = [
 const Header = ({ fn, val, id }) => {
   const { i18n } = useTranslation();
 
-  const darkModeHandler = () => {
-    setIsDark((prev) => {
-      const newMode = !prev;
-      localStorage.setItem("darkMode", JSON.stringify(newMode));
-      document.body.classList.toggle("dark", newMode);
-      return newMode;
-    });
-  };
 
   const changeLang = (e) => {
     const lang_code = e.target.value;
@@ -59,7 +50,7 @@ const Header = ({ fn, val, id }) => {
           </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
-          <Link to={`/movie/${1}`}>
+          <Link to={`/saved`}>
             <IoTabletPortraitSharp className="text-[20px]" />
             <span>Сеанс</span>
           </Link>
@@ -69,8 +60,10 @@ const Header = ({ fn, val, id }) => {
           <span>Билет</span>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <Link to={`/search`}>
           <FiSearch className="text-[20px]" />
           <span>Поиск</span>
+          </Link>
         </li>
       </ul>
       <div className="flex gap-2 items-center">

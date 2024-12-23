@@ -1,7 +1,10 @@
 import Detail from "@/components/detail/Detail";
+import Saved from "@/components/saved/Saved";
 import Home from "@/pages/home/Home";
 import Latest from "@/pages/latest/Latest";
 import Layout from "@/pages/layout/Layout";
+import NotFound from "@/pages/notFound/NotFound";
+import Search from "@/pages/search/Search";
 import { useRoutes } from "react-router-dom";
 
 const Router = () => {
@@ -22,6 +25,18 @@ const Router = () => {
           path: "/movie/:id",
           element: <Detail />,
         },
+        {
+          path: "/saved",
+          element: <Saved />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+        {
+          path: "*",
+          element: <NotFound/>,
+        }
       ],
     },
   ]);

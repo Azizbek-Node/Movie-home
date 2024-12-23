@@ -32,11 +32,9 @@ const Home = () => {
   }, []);
 
   return (
-    <main className={`${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-      <Header fn={darkModeHandler} val={isDark} />
+    <main>
       <Carousel data={data} />
       <Movies data={data} />
-      <Footer />
     </main>
   );
 };
