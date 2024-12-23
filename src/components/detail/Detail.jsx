@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { request } from "../../api";
 import { FaHome } from "react-icons/fa";
-
+import './loading.css'
 const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,7 +23,14 @@ const Details = () => {
 
   const { data, isLoading, error } = useQuery(["movieDetails", id], fetchMovieDetails);
 
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading){
+    return (
+      <div className="loader-container flex flex-col items-center justify-center min-h-[585px]">
+        <span className="loader"></span>
+        <p className="text-2xl mt-4">Загрузка...</p>
+      </div>
+    )
+  }
   if (error) return <div>Ошибка: {error.message}</div>;
 
   const { movie, similar, credits } = data;
