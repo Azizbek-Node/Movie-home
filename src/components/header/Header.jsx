@@ -56,8 +56,10 @@ const Header = ({ fn, val, id }) => {
           </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
+          <Link to={`*`}>
           <RiCoupon3Line className="text-[20px]" />
           <span>Билет</span>
+          </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
           <Link to={`/search`}>
