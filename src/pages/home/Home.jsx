@@ -11,15 +11,6 @@ const Home = () => {
     return savedMode ? JSON.parse(savedMode) : false;
   });
 
-  const darkModeHandler = () => {
-    setIsDark((prev) => {
-      const newMode = !prev;
-      localStorage.setItem("darkMode", JSON.stringify(newMode));
-      document.body.classList.toggle("dark", newMode);
-      return newMode;
-    });
-  };
-
   useEffect(() => {
     document.body.classList.toggle("dark", isDark);
   }, [isDark]);

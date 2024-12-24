@@ -1,12 +1,29 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { request } from "../../api";
-import { FaHome } from "react-icons/fa";
-import './loading.css'
+import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
+import './loading.css';
+import Movies from "../movies/Movies";
+import { useStateValue } from "../context";
+
 const Details = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const [isSaved, setIsSaved] = useState(false);
+  const { setWishlist, wishlist, setCount } = useStateValue();
+
+  const handleBookmark = (movie) => {
+    const isInWishlist = wishlist.some((item) => item.id === movie.id);
+    if (isInWishlist) {
+      setWishlist((prev) => prev.filter((item) => item.id !== movie.id));
+      setCount((prev) => prev - 1);
+      setIsSaved(false);
+    } else {
+      setWishlist((prev) => [...prev, movie]);
+      setCount((prev) => prev + 1);
+      setIsSaved(true);
+    }
+  };
 
   const fetchMovieDetails = async () => {
     const [movieRes, similarRes, creditsRes] = await Promise.all([
@@ -23,14 +40,26 @@ const Details = () => {
 
   const { data, isLoading, error } = useQuery(["movieDetails", id], fetchMovieDetails);
 
-  if (isLoading){
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    // Wishlistda ushbu film mavjudligini tekshirish
+    if (data?.movie) {
+      setIsSaved(wishlist.some((item) => item.id === data.movie.id));
+    }
+  }, [data, wishlist]);
+
+  if (isLoading) {
     return (
       <div className="loader-container flex flex-col items-center justify-center min-h-[585px]">
         <span className="loader"></span>
         <p className="text-2xl mt-4">Загрузка...</p>
       </div>
-    )
+    );
   }
+
   if (error) return <div>Ошибка: {error.message}</div>;
 
   const { movie, similar, credits } = data;
@@ -62,6 +91,16 @@ const Details = () => {
             src={`${import.meta.env.VITE_IMAGE_URL}${movie?.backdrop_path}`}
             alt={movie?.title || "Постер"}
           />
+          <div
+            onClick={() => handleBookmark(movie)}
+            className="absolute top-4 right-4 bg-opacity-75 bg-black text-white p-2 rounded-full hover:bg-blue-700 cursor-pointer"
+          >
+            {isSaved ? (
+              <IoBookmark size={24} />
+            ) : (
+              <IoBookmarkOutline size={24} />
+            )}
+          </div>
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-4">{movie?.title}</h1>
             <p className="text-sm md:text-lg mb-6">
@@ -133,6 +172,9 @@ const Details = () => {
           >
             Смотреть трейлер
           </button>
+          <div>
+            <Movies data={data} />
+          </div>
         </div>
       </div>
     </div>

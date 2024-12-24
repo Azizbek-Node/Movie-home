@@ -1,4 +1,5 @@
 import Detail from "@/components/detail/Detail";
+import Films from "@/components/films/Films";
 import Saved from "@/components/saved/Saved";
 import Home from "@/pages/home/Home";
 import Latest from "@/pages/latest/Latest";
@@ -26,12 +27,16 @@ const Router = () => {
           element: <Detail />,
         },
         {
+          path: "/films",
+          element: <Films />,
+        },
+        {
           path: "/saved",
-          element: <Saved />,
+          element: <Saved />
         },
         {
           path: "*",
-          element: <NotFound />,
+          element: <Search />,
         },
         {
           path: "*",

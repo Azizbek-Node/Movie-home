@@ -11,23 +11,23 @@ const Movies = ({ data }) => {
   console.log(data);
 
   return (
-    <div>
-      <div className="flex gap-2 flex-wrap container justify-center">
-        <Swiper
-        loop={true} 
+    <div className="flex gap-2 flex-wrap container justify-center">
+      <Swiper
+        loop={true}
         navigation={true}
         spaceBetween={20}
-        slidesPerView={4} 
-        modules={[Navigation]} 
+        slidesPerView={4}
+        modules={[Navigation]}
         className="MoviesSwiper"
       >
         {data?.results?.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <MovieItem {...movie} />
+            <div className="w-full flex justify-center h-full">
+              <MovieItem {...movie} />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      </div>
     </div>
   );
 };

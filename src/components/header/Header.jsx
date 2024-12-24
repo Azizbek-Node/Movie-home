@@ -50,13 +50,13 @@ const Header = ({ fn, val, id }) => {
           </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
-          <Link to={`/saved`}>
+          <Link to={`/films`}>
             <IoTabletPortraitSharp className="text-[20px]" />
             <span>Сеанс</span>
           </Link>
         </li>
         <li className="flex flex-wrap flex-col items-center cursor-pointer">
-          <Link to={`*`}>
+          <Link to={`/saved`}>
           <RiCoupon3Line className="text-[20px]" />
           <span>Билет</span>
           </Link>
