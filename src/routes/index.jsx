@@ -35,7 +35,7 @@ const Router = () => {
           element: <Saved />
         },
         {
-          path: "*",
+          path: "/search",
           element: <Search />,
         },
         {
